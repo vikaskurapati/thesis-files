@@ -1,0 +1,9 @@
+spatial accuracy A and spatial resolution R at t_focus. Any equivalent forms for p-waves/s-waves can be used to compare and ensure it works. 
+A -> distance between field's maximum amplitude in space and known source location. -> works for cases with sources. For travelling waves, may be we can consider distance of the maximum amplitude across one of the axes as they're behaving same across one axis?
+For R, I am not exactly sure how we go about it. 
+Entropy -> simple entropy calculations of the wave fields. 
+Another thing which can be tried to recreate the pulse -> linearly increase it over a period of time, let it stay constant for some time-steps and then lnearly decrease it again to the original value. May give more stable results or worse, not sure. The paper did this. (But we need to keep in mind, this paper does reverse ITM? The velocities decrease and then increase. They named it two step ITM)
+How to generate a single point source wave? Can I use LOH1 case or some other case, manipulate the material properties and create a single spherical wave from a point somehow from the origin? And then see how it refocuses?
+They did ITM in only some regions(how exactly to access these regions, groups, need to be checked), may be we can try this for spherical waves, where we change material properties in only one region? We can try other configurations such that we can see only the refocusing and let the outgoing wave die or go out with outflow conditions? May be we can show/see better refocusing in that case?
+Impedence boundary conditions in time-domain: https://www.math.fsu.edu/~hju/cht24.htm
+

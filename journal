@@ -1,0 +1,132 @@
+Simulation(parameters or what is different) -> file name
+16Mai2023
+21Mai2023
+Planar wave, ITM Time = 0.01, scaling factor = 10, file name time1 -> unstable
+			0.001		 	10,		time2 -> stable
+			0.0001			10,		case3 -> stable but nothing visible
+			0.0001			100, 		case4 -> unstable
+			0.00001			100, 		case5 -> stable
+			0.00001			1000, 		case6 -> unstable This makes the trend visible, I think
+Cube size = 4, EndTime = 8.0, ITMStart Time = 4.0, ITMTime = 0.1, ScalingFactor=10, filename case7  -> unstable
+							     0.01, 		10, 		case8 -> energy increasing but converges with a weird convergence
+							     0.001,		10, 		case9 -> stable, focusing visible
+Cube size = 20, EndTime = 40.0, ITMStartTime=20.0, ITMTime=0.1, ScalingFactor=10, filename case10 -> energy still increases but lesser. May be we need a very big box for this to work. 
+
+23Mai2023
+Normal cube size = 2, Planar wave, ITM Time = 0.01, scaling factor = 10, filename case1 -> nothing happens as expected
+					      0.001		      10,	   case2 -> ||
+					      0.0001			10, 		case3 -> ||
+					      0.00001			100, 		case4 -> ||
+					      
+					      Impedance drives the reflective behavior and nothing happens
+					      
+ampField = 2 0 0 0 0 0 0 1 0 ! Amplification of the different wave modes and ITM off	case 5
+kVec = 6.283 6.283 6.283             ! Gives direction of wave propagation, the wavelength of the travelling wave is 2*pi / norm(kVec) case 6
+kVec = 6.283 0 6.283             ! Gives direction of wave propagation, the wavelength of the travelling wave is 2*pi / norm(kVec) case 7
+
+kVec = 0 0 6.283             ! Gives direction of wave propagation, the wavelength of the travelling wave is 2*pi / norm(kVec)
+ampField = 0 0 0 0 0 0 0 1 0 ! Amplification of the different wave modes case 8
+
+kVec = 6.283 0 0             ! Gives direction of wave propagation, the wavelength of the travelling wave is 2*pi / norm(kVec)
+ampField = 2 0 0 0 0 0 0 1 0 ! Amplification of the different wave modes case 9
+
+case10 is case9's ITM version
+
+material: 1,1,2, case 11
+case12 is case10's ITM version -> unstable. Need more looking
+
+29Mai
+material: 1,1,2 case1
+material: 16, 1.5, 1 case2
+case3: case2's ITM, time=0.001, factor=10 -> works as usual. No extra reflections reflecting an extra s-wave
+time=0.01 case 4 -> energy increases similar to the above one. -> I think it is because it is a linear sum, now with the final state just before ITM being the initial condition just after ITM, makes it that the only waves just after ITM are p-waves too. So, may be why there are no extra s-waves.
+ampField = 0 0 0 0 0 0 0 1 0 ! Amplification of the different wave modes, 4,1,1, case 5
+case6 -> ITM of case 5 and refocusing can be seen with just an swave too
+
+30Mai
+case1 -> Impedance does not change but the scaling is done only once. no decrease manager
+WP_LOH1 -> case1 -> type 5- spherical wave -> only p-wave
+case2 -> case1's ITM -> something weird. It immediately came back to the center and something happened. Need to look more into this
+3Jun
+planar wave -> case1 , ITMTime=0.1 with energy output
+WP_LOH1 -> case1, source moved to origin with original situation test.
+4Jun
+ITMTime = 0.01, Factor 1000, case1 -> Seems like something is happening but it is very difficult to see -> energy increases
+Factor 10, case2 -> Something can be seen yes
+ITMTime = 0.001, Factor 1000, case3 -> Seems like something is happening but it is very difficult to see -> energy increases
+ITMTime = 0.0001, Factor 1000, case4 -> Seems like something is happening but it is very difficult to see -> energy increases
+0.0001, 100, case5
+0.0001, 10, case6
+0.00001, 10, case7
+9Jun
+case1 -> ITM with receiver outputs -> trying with lambda -> 2, mu -> 1, rho -> 16
+case2 -> ITM with energy output time -> 0.05 and ITMTime -> 0.01, lambda -> 1, mu -> 0, rho -> 4
+case3 -> no timestep ramp up later
+12Jun
+WP2_LOH1
+case1 -> origin 0,0,0, ITMTime = 0.00001
+case2 -> changing material to something with slow wave speeds   rho:    1.0
+  mu:     0
+  lambda: 10000.0
+ case3 ->   rho:    1.0
+  mu:     0
+  lambda: 250000.0 
+  case4 -> case3 with ITMTime = 0.001
+  case5 -> z increased to 17000.0
+  case6 -> case5 with lambda:10000.0
+  case7 -> 3000,3000,17000 source
+  case8 -> updated mesh. 
+  case9 -> original material but updated mesh
+  case10 -> slightly slowing down  the waves -> 10 times
+case11 -> speeding up twice
+case12 -> fulltime = 18.0m ITMTime=9.0
+case13 -> ITMFactor lower ITMTime=0.01, factor=0.1
+case14 -> ITMFactor 0.5
+case15-> 0.5, ITMTime=0.1
+case16 -> writing with more files and ITMTime=0.01
+case17 -> ITMTime=0.1
+case18 -> Factor=0.1
+case19 -> ITMTime=1.0, Factor=0.1
+case20 -> With energy output
+Planar case
+case1 -> energy output 0.01
+case2 -> factor = 2, time = 0.5 and energy output 0.01
+case3 -> factor = 1.1, time=0.5 and ||
+case4 -> factor = 1.1, time=1.0 and ||
+case5 -> different way with density like case1. -> it works exactly the same as the lame parameters. Still don't know why the energy is increasing
+case6 -> factor 1 to check energy
+case7 -> with the initializecelllocalmatrices commented out -> energy is shown as expected. No reflection, as expected
+case8 -> energy increases and the reflection was as before
+case9 -> 10, 0.1
+case10 -> 10, 0.01
+case11 -> 100, 0.01
+case12 -> 100, 0.001
+case13 -> 100, 0.0001
+case14 -> 100, 0.00001
+13Jun
+Planar wave
+case1, 2 :  normal origin
+case3 origin -1,0,0
+case4 origin 1,0,0
+new folder
+case5 origin 0,0,0 with velocity flipping version
+case6 origin -1,0,0 with velocity flipping version
+case7 origin 1,0,0 with velocity flipping version
+case8 with ITM applied two times to check the energy behaviour
+14Jun
+case1 -> ITM applied two times with factor 0.9
+
+16Jun
+Planar wave
+case1 -> constant wave speed but varying impedance case test1 -> energy blows up -> seems there is a reflection
+case2 -> lesser ITM Time, 0.01. visible reflection clearly
+
+21Jun
+ITM -> reflecting acoustic wave with proper refocusing
+
+22Jun
+ITM -> reflecting acoustic wave with the exact parameters given on github with mu=0. The waves are too fast  to see clear refocusing
+ITM_2 -> lesser time of simulation and lesser ITMTime=0.01 to ensure energy does not blow too much -> works and refocusing can be seen. 
+ITM_Elastic -> elastic material
+ITM_Elastic_2 -> elastic material for less time = 5.0 and ITM at t=2.5
+ITM_Elastic_3 -> elastic material with moment tensor with xy, yx and others zero as in the original source
